@@ -8,38 +8,36 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.sharedpreferences.UserVipApplication.Companion.prefs
+import com.example.sharedpreferences.databinding.ActivityMainBinding
+import com.example.sharedpreferences.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {
 
-        lateinit var btnLogout: Button
-        lateinit var tvName: TextView
-        lateinit var container: LinearLayout
+    private lateinit var binding: ActivitySecondBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        binding = ActivitySecondBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initNameAndColor()
         initUI()
     }
     fun initUI() {
-        btnLogout=findViewById(R.id.btnLogout)
-        btnLogout.setOnClickListener {
+        binding.btnLogout.setOnClickListener {
             prefs.wipe()
             onBackPressed()
         }
 
     }
     fun initNameAndColor(){
-        tvName=findViewById(R.id.tvName)
         val userName = prefs.getName()
-        tvName.text = "Bienvenido $userName"
+        binding.tvName.text = "Bienvenido $userName"
         if(prefs.getVIP()){
             setVIPColorBackground()
         }
     }
     fun setVIPColorBackground(){
-        container=findViewById(R.id.container)
-        container.setBackgroundColor(ContextCompat.getColor(this, R.color.vip_yellow))
+        binding.container.setBackgroundColor(ContextCompat.getColor(this, R.color.vip_yellow))
     }
 
 }

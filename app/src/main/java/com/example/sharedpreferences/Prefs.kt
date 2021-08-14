@@ -7,7 +7,6 @@ class Prefs(val context:Context) {
     val SHARED_NAME = "Mydtb"
     val SHARED_USER_NAME = "username"
     val SHARED_VIP = "vip"
-
     val storage = context.getSharedPreferences(SHARED_NAME, 0)
 
 
